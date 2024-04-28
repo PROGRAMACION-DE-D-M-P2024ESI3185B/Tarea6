@@ -43,9 +43,9 @@ class HomePage extends StatelessWidget {
         pageSize: 15,
         query: getNotesQuery(
             "findByName", FirebaseAuth.instance.currentUser!.uid,
-            name: "hola"),
+            name: ""),
         // query: getNotesQuery("sortByDate", FirebaseAuth.instance.currentUser!.uid),
-        // query: getNotesQuery("", FirebaseAuth.instance.currentUser!.uid),
+        //query: getNotesQuery("", FirebaseAuth.instance.currentUser!.uid),
         itemBuilder: (BuildContext context,
             QueryDocumentSnapshot<Map<String, dynamic>> document) {
           return ItemNote(
@@ -97,7 +97,8 @@ Query<Map<String, dynamic>> getNotesQuery(String operation, String userId,
     return FirebaseFirestore.instance
         .collection(collection)
         .where("userId", isEqualTo: userId)
-        .where("data.title", isEqualTo: name);
+        .where("data.title", isGreaterThanOrEqualTo: name)
+        .where("data.title", isLessThanOrEqualTo: '${name!}\uf8ff');
   } else if (operation == "sortByDate") {
     return FirebaseFirestore.instance
         .collection(collection)
