@@ -10,8 +10,9 @@ A new Flutter project.
 
 ## Lo que me costo mas trabajo
 
-- Conectar mi app con flutter
-- Hacer el troubleshooting en mac
+- Hacer la conexión en timepo real con fireCloud
+- Extrael los datos correctos por id
+- Evitar que se generara una nueva entrada al actualizar.
 
 ## Lo que aprendi
 
