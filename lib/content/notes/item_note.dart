@@ -4,9 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ItemNote extends StatefulWidget {
   final Map<String, dynamic> noteContent;
   final VoidCallback onDelete;
+  final String docId;
 
-  ItemNote({Key? key, required this.noteContent, required this.onDelete})
-      : super(key: key);
+  ItemNote({
+    Key? key,
+    required this.docId,
+    required this.noteContent,
+    required this.onDelete,
+  }) : super(key: key);
 
   @override
   _ItemNoteState createState() => _ItemNoteState();
@@ -33,6 +38,7 @@ class _ItemNoteState extends State<ItemNote> {
   }
 
   Future<void> _deleteNote() async {
+    print('Deleting note: ${widget.noteContent['id']}');
     try {
       await FirebaseFirestore.instance
           .collection("notes")
@@ -48,6 +54,7 @@ class _ItemNoteState extends State<ItemNote> {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
+        print(context);
         return AlertDialog(
           title: Text('Edit Note'),
           content: Column(
@@ -72,13 +79,14 @@ class _ItemNoteState extends State<ItemNote> {
             ),
             TextButton(
               onPressed: () async {
+                print('Updating note: ${widget.docId}');
                 try {
                   await FirebaseFirestore.instance
                       .collection("notes")
-                      .doc(widget.noteContent['id'])
+                      .doc(widget.docId)
                       .update({
-                    'title': _titleController.text,
-                    'description': _descriptionController.text,
+                    'data.title': _titleController.text,
+                    'data.description': _descriptionController.text,
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
