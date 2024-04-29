@@ -24,7 +24,7 @@ A new Flutter project.
 
 ![My Image](./img/ascending.png)
 ![My Image](./img/delited.png)
-![My Image](./img/descending.png)
+![My Image](./img/desending.png)
 ![My Image](./img/home.png)
-![My Image](./img/update.png)
+![My Image](./img/updated.png)
 ![My Image](./img/update1.png)
